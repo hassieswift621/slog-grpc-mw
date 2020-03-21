@@ -39,6 +39,8 @@ func Extract(ctx context.Context) slog.Logger {
 	}
 	// Add grpc_ctxtags tags metadata until now.
 	fields := TagsToFields(ctx)
+	// Add slog fields added until now.
+	fields = append(fields, l.fields...)
 	return l.logger.With(fields...)
 }
 
