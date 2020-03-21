@@ -1,4 +1,4 @@
-module github.com/hassieswift621/grpc_slog
+module github.com/hassieswift621/slog-grpc-mw
 
 go 1.14
 
