@@ -3,9 +3,10 @@ package ctxslog_test
 import (
 	"context"
 
+	"github.com/hassieswift621/slog-grpc-mw/ctxslog"
+
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	pb_testproto "github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto"
-	"github.com/hassieswift621/grpc_slog/ctxslog"
 )
 
 // Simple unary handler that adds custom fields to the requests's context. These will be used for all log statements.
