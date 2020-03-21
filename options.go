@@ -1,10 +1,11 @@
 package grpc_slog
 
 import (
+	"time"
+
 	"cdr.dev/slog"
 	grpc_logging "github.com/grpc-ecosystem/go-grpc-middleware/logging"
 	"google.golang.org/grpc/codes"
-	"time"
 )
 
 var (
@@ -25,7 +26,7 @@ type options struct {
 type Option func(*options)
 
 // CodeToLevel function defines the mapping between gRPC return codes and interceptor log level.
-type CodeToLevel func(code codes.Code, logger slog.Logger) slog.Logger
+type CodeToLevel func(code codes.Code) slog.Level
 
 // DurationToField function defines how to produce duration fields for logging
 type DurationToField func(duration time.Duration) slog.Field
@@ -79,30 +80,30 @@ func WithDurationField(f DurationToField) Option {
 }
 
 // DefaultCodeToLevel is the default implementation of gRPC return codes and interceptor log level for server side.
-func DefaultCodeToLevel(code codes.Code, logger slog.Logger) slog.Logger {
+func DefaultCodeToLevel(code codes.Code) slog.Level {
 	switch code {
 	case codes.OK, codes.Canceled, codes.InvalidArgument, codes.NotFound, codes.AlreadyExists, codes.Unauthenticated:
-		return logger.Leveled(slog.LevelInfo)
+		return slog.LevelInfo
 	case codes.DeadlineExceeded, codes.PermissionDenied, codes.ResourceExhausted, codes.FailedPrecondition, codes.Aborted, codes.OutOfRange, codes.Unavailable:
-		return logger.Leveled(slog.LevelWarn)
+		return slog.LevelWarn
 	case codes.Unknown, codes.Unimplemented, codes.Internal, codes.DataLoss:
-		return logger.Leveled(slog.LevelError)
+		return slog.LevelError
 	default:
-		return logger.Leveled(slog.LevelError)
+		return slog.LevelError
 	}
 }
 
 // DefaultClientCodeToLevel is the default implementation of gRPC return codes to log levels for client side.
-func DefaultClientCodeToLevel(code codes.Code, logger slog.Logger) slog.Logger {
+func DefaultClientCodeToLevel(code codes.Code) slog.Level {
 	switch code {
 	case codes.OK, codes.Canceled, codes.InvalidArgument, codes.NotFound, codes.AlreadyExists, codes.ResourceExhausted, codes.FailedPrecondition, codes.Aborted, codes.OutOfRange:
-		return logger.Leveled(slog.LevelDebug)
+		return slog.LevelDebug
 	case codes.Unknown, codes.DeadlineExceeded, codes.PermissionDenied, codes.Unauthenticated:
-		return logger.Leveled(slog.LevelInfo)
+		return slog.LevelInfo
 	case codes.Unimplemented, codes.Internal, codes.Unavailable, codes.DataLoss:
-		return logger.Leveled(slog.LevelWarn)
+		return slog.LevelWarn
 	default:
-		return logger.Leveled(slog.LevelInfo)
+		return slog.LevelInfo
 	}
 }
 
