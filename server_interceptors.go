@@ -46,7 +46,7 @@ func UnaryServerInterceptor(logger slog.Logger, opts ...Option) grpc.UnaryServer
 	}
 }
 
-// StreamServerInterceptor returns a new streaming server interceptor that adds zap.Logger to the context.
+// StreamServerInterceptor returns a new streaming server interceptor that adds slog.Logger to the context.
 func StreamServerInterceptor(logger slog.Logger, opts ...Option) grpc.StreamServerInterceptor {
 	o := evaluateServerOpt(opts)
 	return func(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {

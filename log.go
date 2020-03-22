@@ -1,8 +1,9 @@
 package grpc_slog
 
 import (
-	"cdr.dev/slog"
 	"context"
+
+	"cdr.dev/slog"
 )
 
 // log logs based on the log level.

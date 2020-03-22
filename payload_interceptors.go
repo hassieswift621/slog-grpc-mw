@@ -10,7 +10,6 @@ import (
 	"github.com/golang/protobuf/proto"
 	grpc_logging "github.com/grpc-ecosystem/go-grpc-middleware/logging"
 	"github.com/hassieswift621/slog-grpc-mw/ctxslog"
-	"go.uber.org/zap/zapcore"
 	"google.golang.org/grpc"
 )
 
@@ -29,7 +28,7 @@ func PayloadUnaryServerInterceptor(logger slog.Logger, decider grpc_logging.Serv
 		if !decider(ctx, info.FullMethod, info.Server) {
 			return handler(ctx, req)
 		}
-		// Use the provided zap.Logger for logging but use the fields from context.
+		// Use the provided slog.Logger for logging but use the fields from context.
 		logEntry := logger.With(append(serverCallFields(info.FullMethod), ctxslog.TagsToFields(ctx)...)...)
 		logProtoMessageAsJson(ctx, logEntry, req, "grpc.request.content", "server request payload logged as grpc.request.content field")
 		resp, err := handler(ctx, req)
@@ -134,11 +133,6 @@ func logProtoMessageAsJson(ctx context.Context, logger slog.Logger, pbMsg interf
 
 type jsonpbObjectMarshaler struct {
 	pb proto.Message
-}
-
-func (j *jsonpbObjectMarshaler) MarshalLogObject(e zapcore.ObjectEncoder) error {
-	// Slog jsonEncoder deals with AddReflect by using json.MarshalObject. The same thing applies for consoleEncoder.
-	return e.AddReflected("msg", j)
 }
 
 func (j *jsonpbObjectMarshaler) MarshalJSON() ([]byte, error) {
