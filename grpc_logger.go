@@ -1,9 +1,10 @@
 package grpc_slog
 
 import (
-	"cdr.dev/slog"
 	"context"
 	"fmt"
+
+	"cdr.dev/slog"
 	"google.golang.org/grpc/grpclog"
 )
 

@@ -1,17 +1,18 @@
 package grpc_slog_test
 
 import (
+	"context"
+	"io/ioutil"
+	"time"
+
 	"cdr.dev/slog"
 	"cdr.dev/slog/sloggers/sloghuman"
-	"context"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	pb_testproto "github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto"
 	grpc_slog "github.com/hassieswift621/slog-grpc-mw"
 	"github.com/hassieswift621/slog-grpc-mw/ctxslog"
 	"google.golang.org/grpc"
-	"io/ioutil"
-	"time"
 )
 
 var (
