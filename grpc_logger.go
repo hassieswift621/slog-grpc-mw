@@ -17,7 +17,7 @@ func ReplaceGrpcLoggerV2(logger slog.Logger) {
 	ReplaceGrpcLoggerV2WithVerbosity(logger, 0)
 }
 
-// ReplaceGrpcLoggerV2WithVerbosity replaces the grpc_.LoggerV2 with the provided logger and verbosity.
+// ReplaceGrpcLoggerV2WithVerbosity replaces the grpc_log.LoggerV2 with the provided logger and verbosity.
 func ReplaceGrpcLoggerV2WithVerbosity(logger slog.Logger, verbosity int) {
 	grpcLogger := &slogGrpcLoggerV2{
 		logger:    logger.With(SystemField, slog.F("grpc_log", true)),
