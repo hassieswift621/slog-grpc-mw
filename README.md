@@ -1,4 +1,7 @@
 # slog-grpc-mw
+[![Godoc reference](https://img.shields.io/badge/godoc-reference-blue?style=flat-square&logo=go)](https://pkg.go.dev/github.com/hassieswift621/slog-grpc-mw@v1.0.0?tab=doc)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/hassieswift621/slog-grpc-mw?logo=go&style=flat-square)](https://github.com/hassieswift621/slog-grpc-mw/releases)
+
 gRPC Go middleware for Cdr's Slog logger: <https://github.com/cdr/slog>
 
 ![Output Screenshot](https://raw.githubusercontent.com/hassieswift621/slog-grpc-mw/dev/screenshot_output.png)
