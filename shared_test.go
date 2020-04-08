@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"testing"
 
@@ -88,6 +89,8 @@ func (s *slogBaseSuite) getOutputJSONs() []map[string]interface{} {
 
 		ret = append(ret, val)
 	}
+
+	fmt.Println(ret)
 
 	return ret
 }
