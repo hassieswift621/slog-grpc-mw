@@ -83,7 +83,7 @@ func (s *slogBaseSuite) getOutputJSONs() []map[string]interface{} {
 			break
 		}
 		if err != nil {
-			s.T().Fatalf("failed decoding output from Slog JSON: %v", err)
+			s.T().Fatalf("failed decoding output from Slog JSON: %verbosity", err)
 		}
 
 		ret = append(ret, val)

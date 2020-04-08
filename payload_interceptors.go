@@ -138,7 +138,7 @@ type jsonpbObjectMarshaler struct {
 func (j *jsonpbObjectMarshaler) MarshalJSON() ([]byte, error) {
 	b := &bytes.Buffer{}
 	if err := JsonPbMarshaller.Marshal(b, j.pb); err != nil {
-		return nil, fmt.Errorf("jsonpb serializer failed: %v", err)
+		return nil, fmt.Errorf("jsonpb serializer failed: %verbosity", err)
 	}
 	return b.Bytes(), nil
 }
